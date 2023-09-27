@@ -1,9 +1,15 @@
-import { View, Text } from "react-native"
+import { View, Text, TextInput } from "react-native"
+import { ContainerLogin } from "../styles/login.style";
+import Input from "../../../shared/components/input/Input";
 
 const Login = () => {
     return (
         <View>
-            <Text>Login</Text>
+            <ContainerLogin>
+                <Text>Login</Text>
+                <Input />
+            </ContainerLogin>
+
         </View>
     )
 }
