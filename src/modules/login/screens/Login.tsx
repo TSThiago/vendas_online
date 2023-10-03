@@ -1,7 +1,9 @@
-import { View, Text, TextInput } from "react-native"
+import { View } from "react-native"
 import { ContainerLogin } from "../styles/login.style";
 import Input from "../../../shared/components/input/Input";
 import Button from "../../../shared/components/button/Button";
+import NewText from "../../../shared/components/text/NewText";
+import { textTypes } from "../../../shared/components/text/textTypes";
 
 const Login = () => {
 
@@ -12,9 +14,9 @@ const Login = () => {
     return (
         <View>
             <ContainerLogin>
-                <Text>Login</Text>
+                <NewText type={textTypes.TITLE_BOLD}>Login</NewText>
                 <Input />
-                <Button margin="8px" onPress={handleOnPress} title="ENTRAR"/>
+                <Button margin="10px" onPress={handleOnPress} title="ENTRAR"/>
             </ContainerLogin>
 
         </View>
