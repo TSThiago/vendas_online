@@ -4,9 +4,10 @@ import Input from "../../../shared/components/input/Input";
 import Button from "../../../shared/components/button/Button";
 import NewText from "../../../shared/components/text/NewText";
 import { textTypes } from "../../../shared/components/text/textTypes";
+import { theme } from "../../../shared/components/themes/theme";
 
 const Login = () => {
-
+    
     const handleOnPress = () => {
         console.log('clicou')
     }
@@ -16,7 +17,7 @@ const Login = () => {
             <ContainerLogin>
                 <NewText type={textTypes.TITLE_BOLD}>Login</NewText>
                 <Input />
-                <Button margin="10px" onPress={handleOnPress} title="ENTRAR"/>
+                <Button type={theme.buttons.buttonsTheme.primary} margin="16px" onPress={handleOnPress} title="ENTRAR"/>
             </ContainerLogin>
 
         </View>

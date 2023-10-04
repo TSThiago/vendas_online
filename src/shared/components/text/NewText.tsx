@@ -1,30 +1,38 @@
 import { TextProps } from "react-native/types";
 import { ContainerNewText } from "./text.style";
-import { useCallback, useMemo } from "react"
+import { useCallback, useEffect, useMemo } from "react"
 import { textTypes } from "./textTypes";
-import { isLoaded, useFonts } from "expo-font";
+import { useFonts } from "expo-font";
 import * as SplashScreen from 'expo-splash-screen';
-
-SplashScreen.preventAutoHideAsync();
 
 interface NewTextProps extends TextProps {
     color?: string;
     type?: string;
 }
 
-const NewText = ({ ...props }: NewTextProps) => {
-    const [isLoaded] = useFonts({
-        'Poppins-Regular': require('../../../assets/fonts/Poppins-Regular.ttf'),
-        'Poppins-Bold': require('../../../assets/fonts/Poppins-Bold.ttf'),
-        'Poppins-Italic': require('../../../assets/fonts/Poppins-Italic.ttf'),
-        'Poppins-Light': require('../../../assets/fonts/Poppins-Light.ttf')
-    });
+const fontMap = {
+    'Poppins-Regular': require('../../../assets/fonts/Poppins-Regular.ttf'),
+    'Poppins-Bold': require('../../../assets/fonts/Poppins-Bold.ttf'),
+    'Poppins-Italic': require('../../../assets/fonts/Poppins-Italic.ttf'),
+    'Poppins-Light': require('../../../assets/fonts/Poppins-Light.ttf')
+};
 
-    const handleOnLayout = useCallback(async () => {
-        if (isLoaded) {
-            await SplashScreen.hideAsync();
-        }
-    }, [isLoaded]);
+const NewText = ({ ...props }: NewTextProps) => {
+    const [fontsLoaded, fontError] = useFonts(fontMap);
+
+    useEffect(() => {
+        const onLayoutRootView = async () => {
+            if (fontsLoaded || fontError) {
+                await SplashScreen.hideAsync();
+            }
+        };
+
+        onLayoutRootView();
+    }, [fontsLoaded, fontError]);
+
+    // if (!fontsLoaded && !fontError) {
+    //     return null;
+    // }
 
     const fontSize = useMemo(() => {
         switch (props.type) {
@@ -76,7 +84,7 @@ const NewText = ({ ...props }: NewTextProps) => {
         }
     }, [props.type]);
 
-    return <ContainerNewText color={props.color} fontSize={fontSize} fontFamily={fontFamily} {...props} onLayout={handleOnLayout} />
+    return <ContainerNewText color={props.color} fontSize={fontSize} fontFamily={fontFamily} {...props} />
 };
 
 export default NewText;
