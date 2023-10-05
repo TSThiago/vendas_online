@@ -8,6 +8,7 @@ interface ContainerNewTextProps {
 
 export const ContainerNewText = styled.Text<ContainerNewTextProps>`
     color: ${(props) => (props.color ? `${props.color}` : 'black')};
+    padding-top: 3px;
     font-size: ${(props) => props.fontSize};
     font-family: ${(props) => props.fontFamily}
 `
