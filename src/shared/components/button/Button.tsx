@@ -24,7 +24,7 @@ const Button = ({ title, loading, disabled, onPress, ...props }: ButtonProps) =>
     const renderText = (color: string) => {
         return (
             <>
-                <NewText color={color} type={textTypes.BUTTON_BOLD}>
+                <NewText color={color} type={textTypes.BUTTON_SEMIBOLD}>
                     {title}
                 </NewText >
                 {loading && <ActivityIndicator color={theme.colors.neutralTheme.white} />}
